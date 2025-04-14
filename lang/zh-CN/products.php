@@ -17,19 +17,22 @@ return [
     'status' => [
         'unpublished' => [
             'content' => '当前产品目前处于草稿状态，不会对客户展示',
-        ]
+        ],
     ],
 
     'actions' => [
         'edit_status' => [
             'label' => '产品状态',
             'heading' => '更新产品状态',
-        ]
+        ],
     ],
+
+    'pages.variants.label' => '变种',
+    'pages.variants.description' => '产品变种',
 
     'pages' => [
         'edit' => [
             'title' => '基础信息',
-        ]
+        ],
     ],
 ];

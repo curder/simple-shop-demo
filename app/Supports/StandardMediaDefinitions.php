@@ -2,12 +2,12 @@
 
 namespace App\Supports;
 
-use App\Contracts\MediaDefinitionsInterface;
-use Spatie\Image\Enums\BorderType;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\MediaCollections\MediaCollection;
+use Spatie\Image\Enums\BorderType;
+use App\Contracts\MediaDefinitionsInterface;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\MediaCollection;
 
 class StandardMediaDefinitions implements MediaDefinitionsInterface
 {

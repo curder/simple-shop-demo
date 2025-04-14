@@ -2,11 +2,11 @@
 
 namespace App\Traits;
 
-use App\Supports\StandardMediaDefinitions;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use App\Supports\StandardMediaDefinitions;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 trait HasMedia
@@ -64,7 +64,6 @@ trait HasMedia
     {
         $conversionClasses = config('media.definitions', []);
         $alias = Str::snake(class_basename(static::class));
-
 
         return $conversionClasses[$alias]
             ?? $conversionClasses[static::class] // fallback for published config

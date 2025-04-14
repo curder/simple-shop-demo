@@ -2,17 +2,17 @@
 
 namespace App\Filament\Resources\ProductResource\RelationManagers;
 
-use App\Events\ModelMediaUpdated;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Events\ModelMediaUpdated;
+use Filament\Tables\Actions\Action;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class MediaRelationManager extends RelationManager
 {
@@ -63,7 +63,7 @@ class MediaRelationManager extends RelationManager
                 return $this->getOwnerRecord()->getMediaCollectionDescription($this->mediaCollection) ?? '';
             })
             ->recordTitleAttribute('name')
-            ->modifyQueryUsing(fn(Builder $query) => $query->where('collection_name', $this->mediaCollection)->orderBy('order_column'))
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('collection_name', $this->mediaCollection)->orderBy('order_column'))
             ->columns([
                 Tables\Columns\ImageColumn::make('image')
                     ->state(function (Media $record): string {
@@ -99,7 +99,7 @@ class MediaRelationManager extends RelationManager
                             ->preservingOriginal()
                             ->toMediaCollection($this->mediaCollection);
                     })->after(
-                        fn() => ModelMediaUpdated::dispatch(
+                        fn () => ModelMediaUpdated::dispatch(
                             $this->getOwnerRecord()
                         )
                     ),
@@ -108,10 +108,10 @@ class MediaRelationManager extends RelationManager
                 Action::make('view_open')
                     ->label(__('medias.actions.view.label'))
                     ->icon('lucide-eye')
-                    ->url(fn(Media $record): string => $record->getUrl())
+                    ->url(fn (Media $record): string => $record->getUrl())
                     ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make()->after(
-                    fn() => ModelMediaUpdated::dispatch(
+                    fn () => ModelMediaUpdated::dispatch(
                         $this->getOwnerRecord()
                     )
                 ),
@@ -120,7 +120,7 @@ class MediaRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()->after(
-                        fn() => ModelMediaUpdated::dispatch(
+                        fn () => ModelMediaUpdated::dispatch(
                             $this->getOwnerRecord()
                         )
                     ),

@@ -6,7 +6,7 @@ return [
     'definitions' => [
         'product' => StandardMediaDefinitions::class,
     ],
-    
+
     'collection' => 'images',
 
     'fallback' => [

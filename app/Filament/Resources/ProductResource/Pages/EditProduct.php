@@ -2,12 +2,12 @@
 
 namespace App\Filament\Resources\ProductResource\Pages;
 
-use App\Filament\Resources\ProductResource;
 use Filament\Actions;
 use Filament\Actions\LocaleSwitcher;
 use Filament\Forms\Components\Radio;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Facades\FilamentIcon;
+use App\Filament\Resources\ProductResource;
 
 class EditProduct extends EditRecord
 {
