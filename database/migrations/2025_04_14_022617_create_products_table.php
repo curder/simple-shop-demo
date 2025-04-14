@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\ProductStatus;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->json('price')->nullable();
             $table->json('size')->nullable();
             $table->json('body')->nullable();
+            $table->string('status')->default(ProductStatus::Draft);
             $table->json('extra')->nullable();
             $table->softDeletes();
             $table->timestamps();

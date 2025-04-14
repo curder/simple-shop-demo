@@ -2,11 +2,12 @@
 
 namespace App\Filament\Resources\ProductResource\Pages;
 
-use Filament\Actions\DeleteAction;
-use Filament\Actions\RestoreAction;
-use Filament\Actions\ForceDeleteAction;
-use Filament\Resources\Pages\EditRecord;
 use App\Filament\Resources\ProductResource;
+use Filament\Actions;
+use Filament\Actions\LocaleSwitcher;
+use Filament\Forms\Components\Radio;
+use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Facades\FilamentIcon;
 
 class EditProduct extends EditRecord
 {
@@ -16,14 +17,49 @@ class EditProduct extends EditRecord
 
     public static bool $formActionsAreSticky = true;
 
+    public function getTitle(): string
+    {
+        return __('products.pages.edit.title');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('products.pages.edit.title');
+    }
+
+    public static function getNavigationIcon(): ?string
+    {
+        return FilamentIcon::resolve('lunar::basic-information');
+    }
+
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\LocaleSwitcher::make(),
-
-            DeleteAction::make(),
-            ForceDeleteAction::make(),
-            RestoreAction::make(),
+            LocaleSwitcher::make(),
+            Actions\EditAction::make('update_status')
+                ->label(
+                    __('products.actions.edit_status.label')
+                )
+                ->modalHeading(
+                    __('products.actions.edit_status.heading')
+                )
+                ->record(
+                    $this->record
+                )->form([
+                    Radio::make('status')
+                        ->label(__('products.form.status.label'))
+                        ->options([
+                            'published' => __('products.form.status.options.published.label'),
+                            'draft' => __('products.form.status.options.draft.label'),
+                        ])
+                        ->descriptions([
+                            'published' => __('products.form.status.options.published.description'),
+                            'draft' => __('products.form.status.options.draft.description'),
+                        ])->live(),
+                ]),
+            Actions\DeleteAction::make(),
+            Actions\ForceDeleteAction::make(),
+            Actions\RestoreAction::make(),
         ];
     }
 }

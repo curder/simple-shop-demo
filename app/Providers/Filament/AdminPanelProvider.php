@@ -2,23 +2,25 @@
 
 namespace App\Providers\Filament;
 
-use Filament\Panel;
-use Filament\Widgets;
 use App\Filament\Pages;
-use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Filament\Forms\Components\Field;
 use Filament\Http\Middleware\Authenticate;
-use Filament\SpatieLaravelTranslatablePlugin;
-use Illuminate\Session\Middleware\StartSession;
-use Illuminate\Cookie\Middleware\EncryptCookies;
 use Filament\Http\Middleware\AuthenticateSession;
-use Illuminate\Routing\Middleware\SubstituteBindings;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Filament\Panel;
+use Filament\PanelProvider;
+use Filament\SpatieLaravelTranslatablePlugin;
+use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentIcon;
+use Filament\Tables\Table;
+use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -58,6 +60,21 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->plugin(SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'zh-CN']));
+    }
+
+    public function register(): void
+    {
+        parent::register();
+        FilamentIcon::register([
+            // Lunar
+            'lunar::basic-information' => 'lucide-edit',
+        ]);
+
+        Table::configureUsing(function (Table $table): void {
+            $table
+                ->paginationPageOptions([10, 25, 50, 100])
+                ->defaultPaginationPageOption(25);
+        });
     }
 
     public function boot(): void
