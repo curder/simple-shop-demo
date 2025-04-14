@@ -51,6 +51,7 @@ class ProductResource extends Resource
                     )->type('info')
                     ->visibleOn('edit')
                     ->hidden(fn (null|Model $record) => $record?->status == 'published'),
+
                 TextInput::make('sku')
                     ->unique(ignoreRecord: true)
                     ->required(),
@@ -61,10 +62,12 @@ class ProductResource extends Resource
                     ->required(),
                 Textarea::make('description')
                     ->label(__('products.description'))
+                    ->columnSpanFull()
                     ->rows(4)
                     ->translatable(),
                 Textarea::make('feature')
                     ->label(__('products.feature'))
+                    ->columnSpanFull()
                     ->rows(4)
                     ->translatable(),
                 RichEditor::make('body')

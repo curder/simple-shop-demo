@@ -4,15 +4,20 @@ namespace App\Models;
 
 use App\Traits\HasMedia;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
-use Spatie\MediaLibrary\HasMedia as SpatieHasMedia;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\MediaLibrary\HasMedia as SpatieHasMedia;
+use Spatie\Translatable\HasTranslations;
 
 class ProductOptionValue extends Model implements SpatieHasMedia
 {
     use HasMedia, HasTranslations;
 
     public array $translatable = ['name'];
+    public function option(): BelongsTo
+    {
+        return $this->belongsTo(ProductOption::class, 'product_option_id');
+    }
 
     public function variants(): BelongsToMany
     {
