@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
+use App\Observers\MediaObserver;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configureModels();
         $this->configureUrl();
         $this->configureVite();
+        $this->registerObservers();
     }
 
     private function configureCommands(): void
@@ -50,5 +52,12 @@ class AppServiceProvider extends ServiceProvider
     private function configureVite(): void
     {
         Vite::usePrefetchStrategy('aggressive');
+    }
+
+    private function registerObservers(): void
+    {
+        if ($mediaModel = config('media-library.media_model')) {
+            $mediaModel::observe(MediaObserver::class);
+        }
     }
 }
