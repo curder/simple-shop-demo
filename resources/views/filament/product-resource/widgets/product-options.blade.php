@@ -200,7 +200,9 @@
                     <x-filament::button color="gray" wire:click="addRestrictedOption">
                         {{ __('product_option.widgets.product-options.actions.add-restricted-option.label') }}
                     </x-filament::button>
-                    {{ $this->addSharedOptionAction }}
+                    <div class="hidden">
+                        {{ $this->addSharedOptionAction }}
+                    </div>
                 </div>
             </div>
             @if(!count($this->configuredOptions))

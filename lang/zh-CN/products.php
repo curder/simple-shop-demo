@@ -37,6 +37,7 @@ return [
 
     'pages.variants.label' => '选项',
     'pages.variants.description' => '产品选项',
+    'pages.variants.save.label' => '保存',
 
     'pages' => [
         'edit' => [

@@ -347,7 +347,8 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
 
     public function saveVariantsAction()
     {
-        return Action::make('saveVariants')
+        return Action::make(__('products.pages.variants.save.label'))
+
             ->action(action: function () {
                 DB::beginTransaction();
 
@@ -472,12 +473,14 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
 
     protected function mapOption(ProductOption $option, array $values = []): array
     {
+
         return [
             'id' => $option->id,
             'key' => "option_{$option->id}",
             //            'value' => $option->translate('name'),
             'value' => $option->name,
-            'position' => $option->pivot?->position ?: count($this->configuredOptions) + 1,
+//            'position' => $option->pivot?->position ?: count($this->configuredOptions) + 1,
+            'position' => count($this->configuredOptions) + 1,
             'readonly' => $option->shared,
             'option_values' => $values,
         ];
