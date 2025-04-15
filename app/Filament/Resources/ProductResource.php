@@ -101,6 +101,8 @@ class ProductResource extends Resource
 
                 TextColumn::make('name')
                     ->label(__('products.table.name.label'))
+                    ->limit(50)
+                    ->tooltip(fn($state) => $state)
                     ->searchable()
                     ->sortable(),
 
