@@ -2,5 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'index')->name('index');
-Route::view('about-us', 'about-us')->name('about-us');
+Route::view('/', 'index')->name('index'); // 首页
+Route::view('about-us', 'about-us')->name('about-us'); // 关于我们
+Route::view('contact-us', 'contact-us')->name('contact-us'); // 联系我们

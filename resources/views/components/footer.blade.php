@@ -62,7 +62,7 @@
                     </li>
                     <li><a href="#" class="text-gray-600 hover:text-blue-600">招贤纳士</a>
                     </li>
-                    <li><a href="contact.html" class="text-gray-600 hover:text-blue-600">联系我们</a>
+                    <li><a href="{{ route('contact-us') }}" class="text-gray-600 hover:text-blue-600">联系我们</a>
                     </li>
                 </ul>
             </div>
