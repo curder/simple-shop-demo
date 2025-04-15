@@ -54,7 +54,7 @@
             <div>
                 <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">关于我们</h3>
                 <ul class="space-y-2">
-                    <li><a href="about.html" class="text-gray-600 hover:text-blue-600">公司介绍</a>
+                    <li><a href="{{ route('about-us') }}" class="text-gray-600 hover:text-blue-600">公司介绍</a>
                     </li>
                     <li><a href="#" class="text-gray-600 hover:text-blue-600">品牌故事</a>
                     </li>

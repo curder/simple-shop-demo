@@ -17,7 +17,7 @@
             </a>
             <nav class="hidden md:flex space-x-8">
                 <a href="{{ route('index') }}" class="text-gray-600 hover:text-blue-600">首页</a>
-                <a href="about.html" class="text-gray-600 hover:text-blue-600">关于我们</a>
+                <a href="{{ route('about-us') }}" class="text-gray-600 hover:text-blue-600">关于我们</a>
                 <a href="contact.html" class="text-gray-600 hover:text-blue-600">联系方式</a>
             </nav>
             <div class="flex items-center space-x-4">
