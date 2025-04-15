@@ -74,14 +74,7 @@
                     <a href="#" class="text-gray-600 text-sm hover:text-blue-600">隐私政策</a>
                     <a href="#" class="text-gray-600 text-sm hover:text-blue-600">使用条款</a>
                     <a href="#" class="text-gray-600 text-sm hover:text-blue-600">网站地图</a>
-                    <div class="flex items-center">
-                        <span class="text-gray-600 text-sm mr-2">语言:</span>
-                        <select
-                                class="text-sm text-gray-600 border border-gray-300 bg-white rounded px-2 py-1">
-                            <option value="zh-CN" selected>简体中文</option>
-                            <option value="en">English</option>
-                        </select>
-                    </div>
+                    <livewire:language-switcher/>
                 </div>
             </div>
         </div>
