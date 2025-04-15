@@ -8,6 +8,7 @@ use Livewire\Component;
 
 class LanguageSwitcher extends Component
 {
+    public bool $prefix = true;
     public $currentLocale;
 
     public function mount(): void

@@ -35,6 +35,7 @@
                         </path>
                     </svg>
                 </a>
+                <livewire:language-switcher :prefix="false"/>
             </div>
         </div>
     </div>
