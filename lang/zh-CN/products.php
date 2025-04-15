@@ -27,8 +27,8 @@ return [
         ],
     ],
 
-    'pages.variants.label' => '变种',
-    'pages.variants.description' => '产品变种',
+    'pages.variants.label' => '选项',
+    'pages.variants.description' => '产品选项',
 
     'pages' => [
         'edit' => [

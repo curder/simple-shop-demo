@@ -59,7 +59,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')
-            ->plugin(SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'zh-CN']));
+            ->plugin(SpatieLaravelTranslatablePlugin::make()->defaultLocales(['zh-CN', 'en']));
     }
 
     public function register(): void

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
+use App\Traits\HasActiveIcon;
 use Awcodes\Shout\Components\Shout;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
@@ -30,13 +31,13 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductResource extends Resource
 {
-    use Translatable;
+    use Translatable, HasActiveIcon;
 
     protected static ?string $model = Product::class;
 
     protected static ?string $slug = 'products';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::End;
 
