@@ -2,23 +2,23 @@
 
 namespace App\Filament\Resources\ProductResource\Widgets;
 
-use DB;
-use App\Models\Language;
-use Filament\Actions\Action;
-use App\Models\ProductOption;
-use App\Models\ProductVariant;
-use App\Models\ProductOptionValue;
-use Awcodes\Shout\Components\Shout;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Contracts\HasForms;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Notifications\Notification;
-use Filament\Actions\Contracts\HasActions;
 use App\Events\ProductVariantOptionsUpdated;
+use App\Models\Language;
+use App\Models\ProductOption;
+use App\Models\ProductOptionValue;
+use App\Models\ProductVariant;
 use App\Supports\MapVariantsToProductOptions;
-use Filament\Forms\Concerns\InteractsWithForms;
+use Awcodes\Shout\Components\Shout;
+use DB;
+use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+use Illuminate\Database\Eloquent\Model;
 
 class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
 {
@@ -271,10 +271,11 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
     protected function storeConfiguredOptions(): void
     {
         //        $language = Language::getDefault();
-        $language = new class
-        {
-            public string $code = 'en';
-        };
+        $language_code = config('app.fallback_locale', 'zh_CN');
+//        $language = new class
+//        {
+//            public string $code = 'zh_CN';
+//        };
         /**
          * Go through our configured options and if they don't
          * exist in the database i.e. they are new, create and map them
@@ -292,7 +293,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
 
             if (! $optionModel->shared) {
                 $optionModel->name = [
-                    $language->code => $optionValue,
+                    $language_code => $optionValue,
                 ];
                 //                $optionModel->label = [
                 //                    $language->code => $optionValue,
@@ -313,7 +314,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
                     ProductOptionValue::find($value['id']);
 
                 $optionValueModel->name = [
-                    $language->code => $value['value'],
+                    $language_code => $value['value'],
                 ];
                 $optionValueModel->position = $value['position'];
 

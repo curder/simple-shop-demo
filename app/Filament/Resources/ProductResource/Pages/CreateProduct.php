@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\ProductResource\Pages;
 
-use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Resources\ProductResource;
+use Filament\Actions\LocaleSwitcher;
+use Filament\Resources\Pages\CreateRecord;
 
 class CreateProduct extends CreateRecord
 {
@@ -14,7 +15,7 @@ class CreateProduct extends CreateRecord
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(),
         ];
     }
 }
