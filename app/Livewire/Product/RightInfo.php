@@ -3,19 +3,23 @@
 namespace App\Livewire\Product;
 
 use App\Models\Product;
-use App\Models\ProductOption;
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use Livewire\Component;
+use App\Models\ProductOption;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\View\View;
 
 class RightInfo extends Component
 {
     public Product $product;
+
     public float $price;
+
     public array|Collection $options = [];
+
     public array $matrix = [];
 
     public array $selectedValues = [];
+
     public $currentVariant = null;
 
     public function mount(Product $product): void
@@ -23,7 +27,7 @@ class RightInfo extends Component
         $this->product = $product;
         $this->price = $product->price;
         $this->getOptions();
-//        dd($this->options, $this->matrix);
+        //        dd($this->options, $this->matrix);
     }
 
     public function updateSelectedValues(int $group_id, int $value_id): void
@@ -40,6 +44,7 @@ class RightInfo extends Component
     {
         $this->options = $this->product->productOptions->mapWithKeys(function (ProductOption $option) {
             ray($option);
+
             return [
                 $option->id => [
                     'id' => $option->id,
@@ -47,13 +52,13 @@ class RightInfo extends Component
                     'values' => $option->values
                         // 存在变体才展示
                         ->filter(
-                            fn($value) => $value->variants->count()
+                            fn ($value) => $value->variants->count()
                         )
-                        ->map(fn($value) => [
+                        ->map(fn ($value) => [
                             'id' => $value->id,
                             'name' => $value->name,
-                        ])
-                ]
+                        ]),
+                ],
             ];
         });
 

@@ -3,8 +3,8 @@
 namespace App\View\Components\Index;
 
 use App\Models\Product;
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
 class Products extends Component
 {

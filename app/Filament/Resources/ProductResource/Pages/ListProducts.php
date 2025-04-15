@@ -2,12 +2,12 @@
 
 namespace App\Filament\Resources\ProductResource\Pages;
 
-use App\Filament\Resources\ProductResource;
-use App\Models\Product;
 use Filament\Actions;
+use App\Models\Product;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\ProductResource;
 
 class ListProducts extends ListRecords
 {

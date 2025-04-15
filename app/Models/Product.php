@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
-use App\Eloquent\Builders\ProductQueryBuilder;
-use App\Enums\ProductStatus;
 use App\Traits\HasMedia;
-use Illuminate\Database\Eloquent\Casts\AsCollection;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Enums\ProductStatus;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\HasMedia as SpatieHasMedia;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Eloquent\Builders\ProductQueryBuilder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia as SpatieHasMedia;
+use Illuminate\Database\Eloquent\Casts\AsCollection;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model implements SpatieHasMedia
 {
@@ -45,7 +45,7 @@ class Product extends Model implements SpatieHasMedia
 
     public function url(): Attribute
     {
-        return Attribute::get(fn() => route('products.show', $this));
+        return Attribute::get(fn () => route('products.show', $this));
     }
 
     public function images(): MorphMany
@@ -58,7 +58,7 @@ class Product extends Model implements SpatieHasMedia
         return Attribute::get(function () {
             $primary = $this->images()->where('custom_properties->primary', true)->first();
 
-            if (!$primary) {
+            if (! $primary) {
                 return null;
             }
 
@@ -72,14 +72,15 @@ class Product extends Model implements SpatieHasMedia
     {
         return Attribute::get(function () {
             $this->load('variant');
+
             return $this->variant?->price_formatted;
         });
     }
 
     public function featureFormatted(): Attribute
     {
-        return Attribute::get(function() {
-           return array_filter(explode("\n", $this->feature));
+        return Attribute::get(function () {
+            return array_filter(explode("\n", $this->feature));
         });
     }
 
@@ -96,7 +97,7 @@ class Product extends Model implements SpatieHasMedia
     protected function hasVariants(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->variants()->count() > 1,
+            get: fn () => $this->variants()->count() > 1,
         );
     }
 

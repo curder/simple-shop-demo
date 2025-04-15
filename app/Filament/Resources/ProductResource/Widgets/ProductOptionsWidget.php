@@ -2,23 +2,23 @@
 
 namespace App\Filament\Resources\ProductResource\Widgets;
 
-use App\Events\ProductVariantOptionsUpdated;
-use App\Models\Language;
-use App\Models\ProductOption;
-use App\Models\ProductOptionValue;
-use App\Models\ProductVariant;
-use App\Supports\MapVariantsToProductOptions;
-use Awcodes\Shout\Components\Shout;
 use DB;
+use App\Models\Language;
 use Filament\Actions\Action;
-use Filament\Actions\Concerns\InteractsWithActions;
-use Filament\Actions\Contracts\HasActions;
+use App\Models\ProductOption;
+use App\Models\ProductVariant;
+use App\Models\ProductOptionValue;
+use Awcodes\Shout\Components\Shout;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Notifications\Notification;
-use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Notifications\Notification;
+use Filament\Actions\Contracts\HasActions;
+use App\Events\ProductVariantOptionsUpdated;
+use App\Supports\MapVariantsToProductOptions;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
 class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
 {
@@ -272,10 +272,10 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
     {
         //        $language = Language::getDefault();
         $language_code = config('app.fallback_locale', 'zh_CN');
-//        $language = new class
-//        {
-//            public string $code = 'zh_CN';
-//        };
+        //        $language = new class
+        //        {
+        //            public string $code = 'zh_CN';
+        //        };
         /**
          * Go through our configured options and if they don't
          * exist in the database i.e. they are new, create and map them
@@ -481,7 +481,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
             'key' => "option_{$option->id}",
             //            'value' => $option->translate('name'),
             'value' => $option->name,
-//            'position' => $option->pivot?->position ?: count($this->configuredOptions) + 1,
+            //            'position' => $option->pivot?->position ?: count($this->configuredOptions) + 1,
             'position' => count($this->configuredOptions) + 1,
             'readonly' => $option->shared,
             'option_values' => $values,

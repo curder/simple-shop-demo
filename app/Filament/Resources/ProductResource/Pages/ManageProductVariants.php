@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\ProductResource\Pages;
 
+use Filament\Support\Facades\FilamentIcon;
 use App\Filament\Resources\ProductResource;
 use Filament\Resources\Pages\ManageRelatedRecords;
-use Filament\Support\Facades\FilamentIcon;
 
 class ManageProductVariants extends ManageRelatedRecords
 {

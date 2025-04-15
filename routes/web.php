@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductsController;
 
 Route::view('/', 'index')->name('index'); // 首页
 Route::view('about-us', 'about-us')->name('about-us'); // 关于我们
