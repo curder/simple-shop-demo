@@ -72,7 +72,7 @@ class Product extends Model implements SpatieHasMedia
     {
         return Attribute::get(function () {
             $this->load('variant');
-            return $this->variant->price;
+            return $this->variant?->price;
         });
     }
     public function variants(): HasMany

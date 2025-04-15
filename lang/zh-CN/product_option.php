@@ -38,7 +38,7 @@ return [
             'notifications' => [
                 'save-variants' => [
                     'success' => [
-                        'title' => '产品变体保存',
+                        'title' => '产品选项保存成功',
                     ],
                 ],
             ],

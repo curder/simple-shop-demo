@@ -347,7 +347,9 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
 
     public function saveVariantsAction()
     {
-        return Action::make(__('products.pages.variants.save.label'))
+        return Action::make('saveVariants')
+            ->label(__('products.pages.variants.save.label'))
+//        return Action::make(__('products.pages.variants.save.label'))
 
             ->action(action: function () {
                 DB::beginTransaction();
