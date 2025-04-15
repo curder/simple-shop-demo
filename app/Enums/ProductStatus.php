@@ -5,7 +5,7 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum ProductStatus: string implements HasLabel, HasColor
+enum ProductStatus: string implements HasColor, HasLabel
 {
     case Draft = 'draft';
     case Published = 'published';
@@ -13,7 +13,7 @@ enum ProductStatus: string implements HasLabel, HasColor
 
     public function getLabel(): ?string
     {
-        return match($this) {
+        return match ($this) {
             self::Draft => '草稿',
             self::Published => '已发布',
             self::Deleted => '已删除',
@@ -22,10 +22,10 @@ enum ProductStatus: string implements HasLabel, HasColor
 
     public function getColor(): string|array|null
     {
-       return match($this) {
-           self::Draft => 'warning',
-           self::Published => 'success',
-           self::Deleted => 'danger',
-       };
+        return match ($this) {
+            self::Draft => 'warning',
+            self::Published => 'success',
+            self::Deleted => 'danger',
+        };
     }
 }

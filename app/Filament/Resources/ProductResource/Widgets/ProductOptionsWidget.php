@@ -2,23 +2,23 @@
 
 namespace App\Filament\Resources\ProductResource\Widgets;
 
-use App\Events\ProductVariantOptionsUpdated;
-use App\Models\Language;
-use App\Models\ProductOption;
-use App\Models\ProductOptionValue;
-use App\Models\ProductVariant;
-use App\Supports\MapVariantsToProductOptions;
-use Awcodes\Shout\Components\Shout;
 use DB;
+use App\Models\Language;
 use Filament\Actions\Action;
-use Filament\Actions\Concerns\InteractsWithActions;
-use Filament\Actions\Contracts\HasActions;
+use App\Models\ProductOption;
+use App\Models\ProductVariant;
+use App\Models\ProductOptionValue;
+use Awcodes\Shout\Components\Shout;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Notifications\Notification;
-use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Notifications\Notification;
+use Filament\Actions\Contracts\HasActions;
+use App\Events\ProductVariantOptionsUpdated;
+use App\Supports\MapVariantsToProductOptions;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
 class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
 {
@@ -63,8 +63,8 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
                     ),
                 Select::make('product_option')
                     ->options(
-                        fn() => $options->mapWithKeys(
-                            fn($option) => [$option->id => $option->translate('name')]
+                        fn () => $options->mapWithKeys(
+                            fn ($option) => [$option->id => $option->translate('name')]
                         )
                     )->label(
                         __('product_option.widgets.product-options.actions.add-shared-option.form.product_option.label')
@@ -76,11 +76,11 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
                 $this->configuredOptions[] = $this->mapOption(
                     $productOption,
                     $productOption->values->map(
-                        fn($value) => $this->mapOptionValue($value, true)
+                        fn ($value) => $this->mapOptionValue($value, true)
                     )->toArray()
                 );
             })->after(
-                fn() => ProductVariantOptionsUpdated::dispatch($this->record)
+                fn () => ProductVariantOptionsUpdated::dispatch($this->record)
             );
     }
 
@@ -89,7 +89,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
         $productOptions = $this->query()->get();
 
         $sharedOptionIds = $productOptions->filter(
-            fn($option) => $option->shared
+            fn ($option) => $option->shared
         )->pluck('id');
 
         $disabledSharedOptionValues = ProductOptionValue::whereIn(
@@ -107,9 +107,9 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
                 return $this->mapOptionValue($value, true);
             })->merge(
                 $disabledSharedOptionValues->filter(
-                    fn($value) => $value->product_option_id == $productOption->id
+                    fn ($value) => $value->product_option_id == $productOption->id
                 )->map(
-                    fn($value) => $this->mapOptionValue($value, false)
+                    fn ($value) => $this->mapOptionValue($value, false)
                 )
             )->sortBy('position')->values()->toArray() : [];
 
@@ -132,7 +132,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
         return $this->record->productOptions()
             ->with('values', function ($query) {
                 $query->whereHas('variants', function ($relation) {
-                    $relation->whereIn($relation->getModel()->getTable() . '.id', $this->record->variants()->pluck('id'));
+                    $relation->whereIn($relation->getModel()->getTable().'.id', $this->record->variants()->pluck('id'));
                 });
             });
     }
@@ -170,7 +170,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
         foreach ($this->configuredOptions as $configuredOption) {
             $enabledCount = collect($configuredOption['option_values'])
                 ->filter(
-                    fn($value) => $value['enabled']
+                    fn ($value) => $value['enabled']
                 )->count();
 
             if ($enabledCount) {
@@ -232,15 +232,15 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
 
         $optionValues = collect($this->configuredOptions)
             ->filter(
-                fn($option) => $option['value']
+                fn ($option) => $option['value']
             )
             ->mapWithKeys(
-                fn($option) => [$option['value'] => collect($option['option_values'])
+                fn ($option) => [$option['value'] => collect($option['option_values'])
                     ->filter(
-                        fn($value) => $value['enabled']
+                        fn ($value) => $value['enabled']
                     )
                     ->map(
-                        fn($value) => $value['value']
+                        fn ($value) => $value['value']
                     )]
             )->toArray();
 
@@ -252,7 +252,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
                 'price' => $variant->price ?: 0,
                 'stock' => $variant->stock,
                 'values' => $variant->values->mapWithKeys(
-                    fn($value) => [$value->option->translate('name') => $value->translate('name')]
+                    fn ($value) => [$value->option->translate('name') => $value->translate('name')]
                 )->toArray(),
             ];
         })->toArray();
@@ -264,14 +264,15 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
     {
         return collect($this->variants)
             ->reject(
-                fn($variant) => $variant['variant_id']
+                fn ($variant) => $variant['variant_id']
             )->isNotEmpty();
     }
 
     protected function storeConfiguredOptions(): void
     {
         //        $language = Language::getDefault();
-        $language = new class {
+        $language = new class
+        {
             public string $code = 'en';
         };
         /**
@@ -289,7 +290,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
 
             $optionValue = $option['value'];
 
-            if (!$optionModel->shared) {
+            if (! $optionModel->shared) {
                 $optionModel->name = [
                     $language->code => $optionValue,
                 ];
@@ -331,11 +332,11 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
             $configuredOption = collect(
                 $this->configuredOptions
             )->first(
-                fn($o) => $o['value'] == $option
+                fn ($o) => $o['value'] == $option
             );
 
             $valueId = collect($configuredOption['option_values'])->first(
-                fn($v) => $v['value'] == $value
+                fn ($v) => $v['value'] == $value
             )['id'];
             $valueIds[] = $valueId;
         }
@@ -356,12 +357,12 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
                  * have been removed. In this case we still want to keep a
                  * variant at least one is needed for Lunar to function.
                  */
-                if (!count($this->variants)) {
+                if (! count($this->variants)) {
                     $variant = $this->record->variants()->first();
                     $variant->values()->detach();
 
                     $this->record->productOptions()->exclusive()->each(
-                        fn(ProductOption $productOption) => $productOption->delete()
+                        fn (ProductOption $productOption) => $productOption->delete()
                     );
 
                     $this->record->productOptions()->shared()->detach();
@@ -369,7 +370,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
                         ->where('id', '!=', $variant->id)
                         ->get()
                         ->each(
-                            fn(ProductVariant $variant) => $variant->delete()
+                            fn (ProductVariant $variant) => $variant->delete()
                         );
 
                     DB::commit();
@@ -385,14 +386,14 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
                     $variant = new ProductVariant([
                         'product_id' => $this->record->id,
                     ]);
-//                    $basePrice = null;
+                    //                    $basePrice = null;
 
-                    if (!empty($variantData['variant_id'])) {
+                    if (! empty($variantData['variant_id'])) {
                         $variant = ProductVariant::find($variantData['variant_id']);
-//                        $basePrice = $variant->basePrices->first();
+                        //                        $basePrice = $variant->basePrices->first();
                     }
 
-                    if (!empty($variantData['copied_id'])) {
+                    if (! empty($variantData['copied_id'])) {
                         $copiedVariant = ProductVariant::find(
                             $variantData['copied_id']
                         );
@@ -435,7 +436,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
                 $this->record->variants()->whereNotIn('id', $variantIds)
                     ->get()
                     ->each(
-                        fn($variant) => $variant->delete()
+                        fn ($variant) => $variant->delete()
                     );
                 DB::commit();
 
@@ -443,13 +444,14 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
                     __('product_option.widgets.product-options.notifications.save-variants.success.title')
                 )->success()->send();
             })->after(
-                fn() => ProductVariantOptionsUpdated::dispatch($this->record)
+                fn () => ProductVariantOptionsUpdated::dispatch($this->record)
             );
     }
 
     public function getVariantLink($variantId)
     {
         return '';
+
         return ProductVariantResource::getUrl('edit', [
             'product' => $this->record,
             'record' => $variantId,
@@ -472,7 +474,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
         return [
             'id' => $option->id,
             'key' => "option_{$option->id}",
-//            'value' => $option->translate('name'),
+            //            'value' => $option->translate('name'),
             'value' => $option->name,
             'position' => $option->pivot?->position ?: count($this->configuredOptions) + 1,
             'readonly' => $option->shared,
