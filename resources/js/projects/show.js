@@ -44,8 +44,10 @@ function decrementQuantity() {
 
 // 初始化
 document.addEventListener('DOMContentLoaded', function () {
-    // 设置初始激活缩略图
-    thumbnails[0].classList.add('active');
+    if (thumbnails.length) {
+        // 设置初始激活缩略图
+        thumbnails[0].classList.add('active');
+    }
 
     // 属性选择
     // const sizeItems = document.querySelectorAll('.size-item');
@@ -62,6 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const buyNowBtn = document.querySelector('.px-6.py-3.bg-blue-600');
     const closeModalBtn = document.getElementById('closeModalBtn');
 
+    if (!buyNowBtn) {
+        return;
+    }
     buyNowBtn.addEventListener('click', function () {
         modal.classList.remove('hidden');
     });

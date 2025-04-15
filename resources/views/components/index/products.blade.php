@@ -9,7 +9,7 @@
                              alt="{{ $product->name }}" class="w-full h-48 object-cover">
                     </a>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">{{ $product->name }}</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-wrap text-ellipsis">{{ $product->name }}</h3>
                         <p class="text-gray-600 mb-4">{{ $product->description }}</p>
                         <div class="flex justify-between items-center">
                             <span class="text-blue-600 font-semibold">¥{{ $product->price }}</span>
