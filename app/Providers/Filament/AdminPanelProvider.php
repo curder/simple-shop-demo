@@ -82,7 +82,8 @@ class AdminPanelProvider extends PanelProvider
     public function boot(): void
     {
         Field::macro('translatable', function () {
-            return $this->hint('Translatable')
+            return $this
+                // ->hint('Translatable')
                 ->hintIcon('heroicon-m-language');
         });
     }

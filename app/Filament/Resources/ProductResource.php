@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ProductStatus;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
 use App\Traits\HasActiveIcon;
@@ -22,6 +23,8 @@ use Filament\Tables\Actions\ForceDeleteAction;
 use Filament\Tables\Actions\ForceDeleteBulkAction;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
+use Filament\Tables\Columns\Column;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
@@ -82,14 +85,30 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('sku'),
+                TextColumn::make('status')
+                    ->label(__('products.table.status.label'))
+                    ->badge()
+                    ->getStateUsing(
+                        fn (Model $record) => $record->deleted_at ? ProductStatus::Deleted : $record->status
+                    ),
+                SpatieMediaLibraryImageColumn::make('thumbnail')
+                    ->collection(config('media.collection'))
+                    ->conversion('small')
+                    ->limit()
+                    ->stacked()
+                    ->circular()
+                    ->label(''),
 
                 TextColumn::make('name')
-                    ->label(__('products.name'))
+                    ->label(__('products.table.name.label'))
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('price'),
+                self::getSkuTableColumn(),
+
+                TextColumn::make('variants_sum_stock')
+                    ->label(__('products.table.stock.label'))
+                    ->sum('variants', 'stock'),
             ])
             ->filters([
                 TrashedFilter::make(),
@@ -147,5 +166,40 @@ class ProductResource extends Resource
     public static function getGloballySearchableAttributes(): array
     {
         return ['name'];
+    }
+
+    public static function getLabel(): string
+    {
+        return __('products.label');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('products.plural_label');
+    }
+
+
+    public static function getSkuTableColumn(): Column
+    {
+        return TextColumn::make('variants.sku')
+            ->label(__('products.table.sku.label'))
+            ->tooltip(function (TextColumn $column, Model $record): ?string {
+
+                if ($record->variants->count() <= $column->getListLimit()) {
+                    return null;
+                }
+
+                if ($record->variants->count() > 30) {
+                    $record->variants = $record->variants->slice(0, 30);
+                }
+
+                return $record->variants
+                    ->map(fn ($variant) => $variant->sku)
+                    ->implode(', ');
+            })
+            ->listWithLineBreaks()
+            ->limitList(1)
+            ->toggleable()
+            ->searchable();
     }
 }

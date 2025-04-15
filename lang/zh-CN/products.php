@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'plural_label' => '产品',
+    'label' => '产品',
+
     'name' => '产品名称',
     'description' => '产品描述',
     'feature' => '产品特色',
@@ -14,9 +17,14 @@ return [
     'form.status.options.draft.label' => '草稿箱',
     'form.status.options.draft.description' => '产品将对客户隐藏',
 
+    'table.status.label' => '状态',
+    'table.name.label' => '产品名',
+    'table.sku.label' => '产品标识',
+    'table.stock.label' => '当前库存',
+
     'status' => [
         'unpublished' => [
-            'content' => '当前产品目前处于草稿状态，不会对客户展示',
+            'content' => '当前产品目前处于草稿状态，不对客户展示',
         ],
     ],
 
