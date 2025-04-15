@@ -1,20 +1,20 @@
 <x-layouts.app>
-    <x-slot:title>联系我们 - 空手道服装商城</x-slot:title>
+    <x-slot:title>@lang('contact-us.title')</x-slot:title>
     <div class="container mx-auto p-4 mt-6">
         <div class="flex items-center text-sm text-gray-500 mb-6">
-            <a href="{{ route('index') }}" class="hover:text-blue-600">首页</a>
+            <a href="{{ route('index') }}" class="hover:text-blue-600">@lang('header.index')</a>
             <span class="px-2">/</span>
-            <span class="text-gray-700">联系方式</span>
+            <span class="text-gray-700">@lang('contact-us.name')</span>
         </div>
 
         <div class="bg-white p-6 rounded shadow">
-            <h1 class="text-3xl font-bold mb-6 text-gray-900">联系我们</h1>
+            <h1 class="text-3xl font-bold mb-6 text-gray-900">@lang('contact-us.name')</h1>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- 联系方式 -->
                 <div class="space-y-6">
                     <div>
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">联系信息</h2>
+                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">@lang('contact-us.contact_info')</h2>
                         <ul class="space-y-4">
                             <li class="flex items-center">
                                 <svg class="h-6 w-6 text-blue-500 mr-3" fill="none" viewBox="0 0 24 24"
@@ -23,7 +23,7 @@
                                           d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
                                     </path>
                                 </svg>
-                                <span class="text-gray-700">400-123-4567</span>
+                                <span class="text-gray-700">@lang('contact-us.contact_info_list.phone')</span>
                             </li>
                             <li class="flex items-center">
                                 <svg class="h-6 w-6 text-blue-500 mr-3" fill="none" viewBox="0 0 24 24"
@@ -32,7 +32,7 @@
                                           d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                                     </path>
                                 </svg>
-                                <span class="text-gray-700">info@karatestore.com</span>
+                                <span class="text-gray-700">@lang('contact-us.contact_info_list.email')</span>
                             </li>
                             <li class="flex items-center">
                                 <svg class="h-6 w-6 text-blue-500 mr-3" fill="none" viewBox="0 0 24 24"
@@ -43,31 +43,25 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
-                                <span class="text-gray-700">北京市朝阳区体育中心路88号空手道大厦15层</span>
+                                <span class="text-gray-700">@lang('contact-us.contact_info_list.address')</span>
                             </li>
                         </ul>
                     </div>
 
                     <div>
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">营业时间</h2>
+                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">@lang('contact-us.business_hours')</h2>
                         <ul class="space-y-2">
-                            <li class="flex">
-                                <span class="text-gray-700">周一至周五:</span>
-                                <span class="text-gray-700 ml-4">9:00 - 18:00</span>
-                            </li>
-                            <li class="flex">
-                                <span class="text-gray-700">周六:</span>
-                                <span class="text-gray-700 ml-4">10:00 - 16:00</span>
-                            </li>
-                            <li class="flex">
-                                <span class="text-gray-700">周日:</span>
-                                <span class="text-gray-700 ml-4">休息</span>
-                            </li>
+                            @foreach(__('contact-us.business_hours_list') as $key => $value)
+                                <li class="flex">
+                                    <span class="text-gray-700">{{ $key }}:</span>
+                                    <span class="text-gray-700 ml-4">{{$value}}</span>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
 
                     <div>
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">关注我们</h2>
+                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">@lang('contact-us.follow_us')</h2>
                         <div class="flex space-x-4">
                             <a href="#" class="text-gray-600 hover:text-blue-600">
                                 <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
@@ -103,31 +97,37 @@
 
                 <!-- 留言表单 -->
                 <div>
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">发送留言</h2>
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">@lang('contact-us.message')</h2>
                     <form class="space-y-4">
                         <div>
-                            <label for="name" class="block text-gray-700 mb-1">姓名</label>
-                            <input type="text" id="name" name="name" placeholder="请输入您的姓名"
+                            <label for="name" class="block text-gray-700 mb-1">@lang('contact-us.message_name')</label>
+                            <input type="text" id="name" name="name"
+                                   placeholder="@lang('contact-us.message_name_placeholder')"
                                    class="w-full px-4 py-2 border rounded-md bg-white border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         <div>
-                            <label for="email" class="block text-gray-700 mb-1">电子邮箱</label>
-                            <input type="email" id="email" name="email" placeholder="请输入您的电子邮箱"
+                            <label for="email"
+                                   class="block text-gray-700 mb-1">@lang('contact-us.message_email')</label>
+                            <input type="email" id="email" name="email"
+                                   placeholder="@lang('contact-us.message_email_placeholder')"
                                    class="w-full px-4 py-2 border rounded-md bg-white border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         <div>
-                            <label for="phone" class="block text-gray-700 mb-1">电话</label>
-                            <input type="tel" id="phone" name="phone" placeholder="请输入您的电话号码"
+                            <label for="phone"
+                                   class="block text-gray-700 mb-1">@lang('contact-us.message_phone')</label>
+                            <input type="tel" id="phone" name="phone"
+                                   placeholder="@lang('contact-us.message_phone_placeholder')"
                                    class="w-full px-4 py-2 border rounded-md bg-white border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         <div>
-                            <label for="message" class="block text-gray-700 mb-1">留言内容</label>
-                            <textarea id="message" name="message" rows="5" placeholder="请输入您的留言内容"
+                            <label for="message" class="block text-gray-700 mb-1">@lang('contact-us.message')</label>
+                            <textarea id="message" name="message" rows="5"
+                                      placeholder="@lang('contact-us.message_placeholder')"
                                       class="w-full px-4 py-2 border rounded-md bg-white border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                         </div>
                         <button type="submit"
                                 class="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded transition-colors">
-                            提交留言
+                            @lang('contact-us.send')
                         </button>
                     </form>
                 </div>
@@ -135,11 +135,11 @@
 
             <!-- 地图 -->
             <div class="mt-10">
-                <h2 class="text-2xl font-semibold mb-4 text-gray-800">我们的位置</h2>
+                <h2 class="text-2xl font-semibold mb-4 text-gray-800">@lang('contact-us.our_location')</h2>
                 <div class="w-full h-96 bg-gray-200 rounded">
                     <!-- 这里可以嵌入真实的地图，为了演示使用占位符 -->
                     <div class="w-full h-full flex items-center justify-center">
-                        <p class="text-gray-500">地图加载中...</p>
+                        <p class="text-gray-500">@lang('contact-us.location_description')</p>
                     </div>
                 </div>
             </div>
