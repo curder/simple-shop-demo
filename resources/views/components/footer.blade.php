@@ -2,9 +2,8 @@
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">空手道服装商城</h3>
-                <p class="text-gray-600 mb-4">
-                    为空手道爱好者提供高品质、专业级别的装备，满足从初学者到专业选手的各种需求。</p>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">@lang('header.name')</h3>
+                <p class="text-gray-600 mb-4">@lang('footer.description')</p>
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-500 hover:text-blue-600">
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -22,58 +21,73 @@
                 </div>
             </div>
             <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">产品分类</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">@lang('footer.product_category_label')</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">空手道道服</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.product_category_list.kendo')</a>
                     </li>
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">空手道腰带</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.product_category_list.karate')</a>
                     </li>
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">训练器材</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.product_category_list.equipment')</a>
                     </li>
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">护具装备</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.product_category_list.protective_equipment')</a>
                     </li>
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">比赛装备</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.product_category_list.competition_equipment')</a>
                     </li>
                 </ul>
             </div>
             <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">客户服务</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">@lang('footer.customer_service_label')</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">购物指南</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.customer_service_list.shopping_guide')</a>
                     </li>
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">配送方式</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.customer_service_list.delivery_method')</a>
                     </li>
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">支付方式</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.customer_service_list.payment_method')</a>
                     </li>
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">售后服务</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.customer_service_list.after_sales_service')</a>
                     </li>
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">帮助中心</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.customer_service_list.help_center')</a>
                     </li>
                 </ul>
             </div>
             <div>
-                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">关于我们</h3>
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">@lang('footer.about_us_label')</h3>
                 <ul class="space-y-2">
-                    <li><a href="{{ route('about-us') }}" class="text-gray-600 hover:text-blue-600">公司介绍</a>
+                    <li><a href="{{ route('about-us') }}"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.about_us_list.company_introduction')</a>
                     </li>
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">品牌故事</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.about_us_list.brand_story')</a>
                     </li>
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">新闻资讯</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.about_us_list.news_information')</a>
                     </li>
-                    <li><a href="#" class="text-gray-600 hover:text-blue-600">招贤纳士</a>
+                    <li><a href="#"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.about_us_list.recruitment')</a>
                     </li>
-                    <li><a href="{{ route('contact-us') }}" class="text-gray-600 hover:text-blue-600">联系我们</a>
+                    <li><a href="{{ route('contact-us') }}"
+                           class="text-gray-600 hover:text-blue-600">@lang('footer.about_us_list.contact_us')</a>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="border-t dark:border-gray-800 pt-6 pb-6">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-600 text-sm mb-4 md:mb-0">&copy; 2023 空手道服装商城 版权所有</p>
+                <p class="text-gray-600 text-sm mb-4 md:mb-0">@lang('footer.copyright')</p>
                 <div class="flex flex-wrap space-x-4 items-center">
-                    <a href="#" class="text-gray-600 text-sm hover:text-blue-600">隐私政策</a>
-                    <a href="#" class="text-gray-600 text-sm hover:text-blue-600">使用条款</a>
-                    <a href="#" class="text-gray-600 text-sm hover:text-blue-600">网站地图</a>
+                    <a href="#" class="text-gray-600 text-sm hover:text-blue-600">@lang('footer.privacy_policy')</a>
+                    <a href="#" class="text-gray-600 text-sm hover:text-blue-600">@lang('footer.terms_of_use')</a>
+                    <a href="#" class="text-gray-600 text-sm hover:text-blue-600">@lang('footer.site_map')</a>
                     <livewire:language-switcher/>
                 </div>
             </div>

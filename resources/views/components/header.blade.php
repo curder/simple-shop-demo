@@ -13,12 +13,13 @@
                     <path d="M8 8L16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     <path d="M16 8L8 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
-                <span class="ml-2 text-xl font-bold text-gray-800">空手道服装商城</span>
+                <span class="ml-2 text-xl font-bold text-gray-800">@lang('header.name')</span>
             </a>
             <nav class="hidden md:flex space-x-8">
-                <a href="{{ route('index') }}" class="text-gray-600 hover:text-blue-600">首页</a>
-                <a href="{{ route('about-us') }}" class="text-gray-600 hover:text-blue-600">关于我们</a>
-                <a href="{{ route('contact-us') }}" class="text-gray-600 hover:text-blue-600">联系方式</a>
+                <a href="{{ route('index') }}" class="text-gray-600 hover:text-blue-600">@lang('header.index')</a>
+                <a href="{{ route('about-us') }}" class="text-gray-600 hover:text-blue-600">@lang('header.about-us')</a>
+                <a href="{{ route('contact-us') }}"
+                   class="text-gray-600 hover:text-blue-600">@lang('header.contact-us')</a>
             </nav>
             <div class="flex items-center space-x-4">
                 <a href="#" class="text-gray-600 hover:text-blue-600">
