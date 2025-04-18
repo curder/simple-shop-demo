@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ProductStatus;
 use App\Models\Product;
-use Illuminate\Support\Arr;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Arr;
 
 class ProductsController extends Controller
 {
     public function show(Product $product): View
     {
+        abort_if($product->status !== ProductStatus::Published, 403);
+
         $product = Product::with([
             'images',
             'variants.values.option',
