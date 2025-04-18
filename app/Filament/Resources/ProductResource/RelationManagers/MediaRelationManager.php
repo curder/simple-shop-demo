@@ -2,17 +2,17 @@
 
 namespace App\Filament\Resources\ProductResource\RelationManagers;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
 use App\Events\ModelMediaUpdated;
-use Filament\Tables\Actions\Action;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Filament\Forms;
+use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaRelationManager extends RelationManager
 {
@@ -38,7 +38,7 @@ class MediaRelationManager extends RelationManager
                     ->label(__('medias.primary'))
                     ->inline(false),
                 Forms\Components\FileUpload::make('media')
-                    ->label(__('medias.label'))
+                    ->label(__('medias.images'))
                     ->columnSpan(2)
                     ->hiddenOn('edit')
                     ->storeFiles(false)
@@ -56,6 +56,7 @@ class MediaRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->modelLabel(__('medias.images'))
             ->heading(function () {
                 return $this->getOwnerRecord()->getMediaCollectionTitle($this->mediaCollection) ?? Str::ucfirst($this->mediaCollection);
             })

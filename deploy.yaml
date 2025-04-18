@@ -35,6 +35,10 @@ config:
       - 'deploy.yaml'
       - '/vendor/'
       - '/node_modules/'
+      - 'public/hot'
+      - 'storage/app/public'
+      - 'storage/logs'
+      - 'storage/media-library'
     include: [ ]
     include-file: false
     exclude-file: false
@@ -77,6 +81,8 @@ tasks:
     - artisan:optimize
     - artisan:filament:optimize
     - artisan:migrate
+    - yarn:install
+    - yarn:run:prod
     - deploy:publish
   #    - php-fpm:reload
   yarn:run:prod:
